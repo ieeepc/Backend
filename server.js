@@ -31,5 +31,5 @@ app.use('/api/feedback', memberFeedbackRoutes);
 app.use('/api/members', memberRoutes);
 app.use('/api/newevent', neweventRoutes);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
