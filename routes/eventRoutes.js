@@ -58,7 +58,7 @@ router.put('/update-event/:id',adminAuth, upload.array('photos', 10), async (req
 
 router.get('/list-events', async (req, res) => {
   try {
-    const events = await Event.find().sort({ date: 1 }); // Sort by date
+    const events = await Event.find().sort({ date: -1 }); // Sort by date
     res.json(events);
   } catch (err) {
     res.status(500).json({ message: 'Error retrieving events', error: err.message });
