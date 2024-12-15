@@ -30,11 +30,11 @@ router.post("/add-member",adminAuth,upload.single("photo"),async (req, res) => {
       }
       // Hash password
       const hashedPassword = await bcrypt.hash(req.body.password, 10);
-
+      const normalizedUsn = req.body.usn.toLowerCase();
       // Save member data in MongoDB
       const member = new Member({
         name: req.body.name,
-        usn: req.body.usn,
+        usn: normalizedUsn,
         year: req.body.year,
         photo: photoUrl,
         linkedin: req.body.linkedin,
@@ -73,10 +73,10 @@ router.put("/update-member/:id", upload.single("photo"), async (req, res) => {
       const result = await cloudinary.uploader.upload(req.file.path);
       member.photo = result.secure_url;
     }
-
+    const normalizedUsn = req.body.usn.toLowerCase();
     // Update member fields
     member.name = req.body.name || member.name;
-    member.usn = req.body.usn || member.usn;
+    member.usn = normalizedUsn || member.usn;
     member.year = req.body.year || member.year;
     member.linkedin = req.body.linkedin || member.linkedin;
     member.github = req.body.github || member.github;
